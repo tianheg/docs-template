@@ -1,0 +1,6 @@
+sphinx
+sphinx-js>=3.1
+sphinx-copybutton
+sphinxcontrib-mermaid
+furo
+myst-parser

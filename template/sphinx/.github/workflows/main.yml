@@ -1,0 +1,48 @@
+name: "Build Sphinx"
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install dependencies
+      run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Clone deploy branch
+      run: |
+        REMOTE_BRANCH="${REMOTE_BRANCH:-gh-pages}"
+        REMOTE_REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+
+        rm -rf build/html/
+        mkdir -p build/html/
+        git clone --depth=1 --branch="${REMOTE_BRANCH}" --single-branch --no-checkout \
+          "${REMOTE_REPO}" build/html/
+    - run: make html
+    - name: Deploy to GitHub Pages
+      if: "github.event_name == 'push'"
+      run: |
+        SOURCE_COMMIT="$(git log -1 --pretty="%an: %B" "$GITHUB_SHA")"
+        pushd build/html/ &>/dev/null
+        if [ "$(git status --porcelain | wc -l)" -eq 0 ]; then
+          exit 0
+        fi
+
+        git add --all
+        git -c user.name="${GITHUB_ACTOR}" -c user.email="${GITHUB_ACTOR}@users.noreply.github.com" \
+          commit --quiet \
+          --message "Deploy docs from ${GITHUB_SHA}" \
+          --message "$SOURCE_COMMIT"
+        git push
+
+        popd &>/dev/null
