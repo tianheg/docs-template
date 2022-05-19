@@ -16,15 +16,14 @@ extensions = [
     # External stuff
     "sphinx_copybutton",
     "myst_parser",
-    "sphinx_js",
     "sphinxcontrib.mermaid"
 ]
 
 # Used to extract JSDoc function/class docs from source
-js_language = 'javascript'
-js_source_path = '../src/'
+# js_language = 'javascript'
+# js_source_path = '../src/'
 # jsdoc_config_path = '../tsconfig.json'
-primary_domain = 'js'
+# primary_domain = 'js'
 
 html_theme = 'furo'
 html_title = "Learn MDN"
