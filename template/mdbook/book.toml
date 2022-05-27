@@ -1,0 +1,10 @@
+
+[book]
+authors = ["tianheg"]
+language = "en"
+multilingual = false
+src = "src"
+title = "mdbook"
+
+[output.html]
+mathjax-support = true
