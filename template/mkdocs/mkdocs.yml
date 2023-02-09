@@ -1,4 +1,39 @@
 site_name: Site
 
+repo_name: tianheg/sourcey
+repo_url: https://github.com/tianheg/sourcey/
+edit_uri: edit/main/docs/
+
 theme:
   name: material
+  features:
+    - content.action.edit
+    - navigation.footer
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - toc.follow
+    - toc.integrate
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra_javascript:
+  - javascript/link.js
+
+nav:
+  - 科学爱好者周刊:
+    - 最新一期: ruanyf-weekly/issue-239.md
+    - 238: ruanyf-weekly/issue-238.md
