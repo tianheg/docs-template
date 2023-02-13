@@ -1,0 +1,10 @@
+* Bikeshed
+
+#+BEGIN_QUOTE
+Bikeshed is a spec-generating tool that takes in lightly-decorated Markdown and spits out a full spec, with cross-spec autolinking, automatic generation of indexes/ToC/etc, and many other features.
+#+END_QUOTE
+
+** 参考资料
+
+- https://github.com/w3c/spec-prod
+- https://github.com/speced/bikeshed
